@@ -4,6 +4,8 @@ import { getSection } from "@/data/menu";
 import { site, allergenLine, imageDisclosure } from "@/data/site";
 import {
   Eyebrow,
+  PriceDash,
+  PricesNotice,
   Section,
   TerrazzoDivider,
   VegMark,
@@ -55,15 +57,16 @@ function UpwasPage() {
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-start">
-          <ul className="grid gap-3">
+          <ul className="border-b border-rule">
             {section.items.map((i) => (
-              <li key={i.id} className="card-dolce p-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <VegMark size={14} />
-                  <p className="text-[18px] font-medium">{i.name}</p>
+              <li key={i.id} className="index-row grid-cols-[1fr_auto] gap-6">
+                <div>
+                  <p className="text-[20px]" style={{ fontFamily: "var(--font-display)" }}>
+                    {i.name}
+                  </p>
+                  {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
                 </div>
-                {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
-
+                <PriceDash />
               </li>
             ))}
           </ul>

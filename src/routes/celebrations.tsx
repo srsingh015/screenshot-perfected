@@ -41,7 +41,11 @@ function Celebrations() {
               <a href={site.phoneHref} className="btn-warm">
                 Call to order a cake
               </a>
-              <Link to="/menu/plated-desserts" className="btn-secondary">
+              <Link
+                to="/menu/$section"
+                params={{ section: "plated-desserts" }}
+                className="btn-secondary"
+              >
                 See plated desserts
               </Link>
             </div>

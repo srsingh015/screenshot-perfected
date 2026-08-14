@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CelebrationsRouteImport } from './routes/celebrations'
+import { Route as OrderOnlineRouteImport } from './routes/order-online'
 import { Route as PureVegRouteImport } from './routes/pure-veg'
 import { Route as ReserveRouteImport } from './routes/reserve'
+import { Route as TheRoomRouteImport } from './routes/the-room'
 import { Route as MenuIndexRouteImport } from './routes/menu.index'
 import { Route as MenuSectionRouteImport } from './routes/menu.$section'
 import { Route as MenuUpwasRouteImport } from './routes/menu.upwas'
@@ -19,6 +22,16 @@ import { Route as MenuUpwasRouteImport } from './routes/menu.upwas'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CelebrationsRoute = CelebrationsRouteImport.update({
+  id: '/celebrations',
+  path: '/celebrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderOnlineRoute = OrderOnlineRouteImport.update({
+  id: '/order-online',
+  path: '/order-online',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PureVegRoute = PureVegRouteImport.update({
@@ -29,6 +42,11 @@ const PureVegRoute = PureVegRouteImport.update({
 const ReserveRoute = ReserveRouteImport.update({
   id: '/reserve',
   path: '/reserve',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheRoomRoute = TheRoomRouteImport.update({
+  id: '/the-room',
+  path: '/the-room',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MenuIndexRoute = MenuIndexRouteImport.update({
@@ -49,16 +67,22 @@ const MenuUpwasRoute = MenuUpwasRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/celebrations': typeof CelebrationsRoute
+  '/order-online': typeof OrderOnlineRoute
   '/pure-veg': typeof PureVegRoute
   '/reserve': typeof ReserveRoute
+  '/the-room': typeof TheRoomRoute
   '/menu/$section': typeof MenuSectionRoute
   '/menu/upwas': typeof MenuUpwasRoute
   '/menu/': typeof MenuIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/celebrations': typeof CelebrationsRoute
+  '/order-online': typeof OrderOnlineRoute
   '/pure-veg': typeof PureVegRoute
   '/reserve': typeof ReserveRoute
+  '/the-room': typeof TheRoomRoute
   '/menu/$section': typeof MenuSectionRoute
   '/menu/upwas': typeof MenuUpwasRoute
   '/menu': typeof MenuIndexRoute
@@ -66,8 +90,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/celebrations': typeof CelebrationsRoute
+  '/order-online': typeof OrderOnlineRoute
   '/pure-veg': typeof PureVegRoute
   '/reserve': typeof ReserveRoute
+  '/the-room': typeof TheRoomRoute
   '/menu/$section': typeof MenuSectionRoute
   '/menu/upwas': typeof MenuUpwasRoute
   '/menu/': typeof MenuIndexRoute
@@ -75,15 +102,34 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/pure-veg' | '/reserve' | '/menu/$section' | '/menu/upwas' | '/menu/'
+    | '/'
+    | '/celebrations'
+    | '/order-online'
+    | '/pure-veg'
+    | '/reserve'
+    | '/the-room'
+    | '/menu/$section'
+    | '/menu/upwas'
+    | '/menu/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/pure-veg' | '/reserve' | '/menu/$section' | '/menu/upwas' | '/menu'
+    | '/'
+    | '/celebrations'
+    | '/order-online'
+    | '/pure-veg'
+    | '/reserve'
+    | '/the-room'
+    | '/menu/$section'
+    | '/menu/upwas'
+    | '/menu'
   id:
     | '__root__'
     | '/'
+    | '/celebrations'
+    | '/order-online'
     | '/pure-veg'
     | '/reserve'
+    | '/the-room'
     | '/menu/$section'
     | '/menu/upwas'
     | '/menu/'
@@ -91,8 +137,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CelebrationsRoute: typeof CelebrationsRoute
+  OrderOnlineRoute: typeof OrderOnlineRoute
   PureVegRoute: typeof PureVegRoute
   ReserveRoute: typeof ReserveRoute
+  TheRoomRoute: typeof TheRoomRoute
   MenuSectionRoute: typeof MenuSectionRoute
   MenuUpwasRoute: typeof MenuUpwasRoute
   MenuIndexRoute: typeof MenuIndexRoute
@@ -107,6 +156,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/celebrations': {
+      id: '/celebrations'
+      path: '/celebrations'
+      fullPath: '/celebrations'
+      preLoaderRoute: typeof CelebrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-online': {
+      id: '/order-online'
+      path: '/order-online'
+      fullPath: '/order-online'
+      preLoaderRoute: typeof OrderOnlineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pure-veg': {
       id: '/pure-veg'
       path: '/pure-veg'
@@ -119,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/reserve'
       fullPath: '/reserve'
       preLoaderRoute: typeof ReserveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-room': {
+      id: '/the-room'
+      path: '/the-room'
+      fullPath: '/the-room'
+      preLoaderRoute: typeof TheRoomRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/menu/': {
@@ -147,8 +217,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CelebrationsRoute: CelebrationsRoute,
+  OrderOnlineRoute: OrderOnlineRoute,
   PureVegRoute: PureVegRoute,
   ReserveRoute: ReserveRoute,
+  TheRoomRoute: TheRoomRoute,
   MenuSectionRoute: MenuSectionRoute,
   MenuUpwasRoute: MenuUpwasRoute,
   MenuIndexRoute: MenuIndexRoute,

@@ -28,15 +28,15 @@ export function SiteHeader() {
           <span className="hidden text-[13px] text-stone sm:inline">{site.subLockup}</span>
         </Link>
 
-        <VegMark size={16} withWords className="ml-1 shrink-0" />
+        <VegMark size={16} className="ml-1 shrink-0" />
 
-        <nav className="ml-auto hidden items-center gap-5 lg:flex" aria-label="Main">
+        <nav className="ml-auto hidden items-center gap-4 lg:flex" aria-label="Main">
           {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
-              className="eyebrow text-[13px] text-ink hover:text-pistachio-600"
-              activeProps={{ className: "eyebrow text-[13px] text-pistachio-600" }}
+              className="eyebrow whitespace-nowrap text-[12px] text-ink hover:text-pistachio-600"
+              activeProps={{ className: "eyebrow whitespace-nowrap text-[12px] text-pistachio-600" }}
             >
               {n.label}
             </Link>
@@ -45,14 +45,18 @@ export function SiteHeader() {
 
         <a
           href={site.phoneHref}
-          className="ml-auto hidden font-mono text-[14px] text-pistachio-800 underline underline-offset-4 lg:ml-4 lg:block"
+          className="ml-4 hidden whitespace-nowrap font-mono text-[13px] text-pistachio-800 underline underline-offset-4 xl:block"
         >
-          ⌛ Timings to confirm — tap to call
+          ⌛ Timings — call
         </a>
 
-        <Link to="/reserve" className="btn-primary ml-auto hidden text-[14px] lg:ml-4 lg:inline-flex">
-          Reserve a table
+        <Link
+          to="/reserve"
+          className="btn-primary ml-4 hidden whitespace-nowrap text-[13px] lg:inline-flex"
+        >
+          Reserve
         </Link>
+
 
         <button
           type="button"

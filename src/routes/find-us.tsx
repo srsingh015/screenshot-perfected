@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { site, mapsUrl } from "@/data/site";
-import { ConfirmPending, Eyebrow, Section, TerrazzoDivider, VegMark } from "@/components/dolce";
+import { Eyebrow, Section, TerrazzoDivider, VegMark } from "@/components/dolce";
 
 export const Route = createFileRoute("/find-us")({
   head: () => ({
@@ -22,8 +22,6 @@ export const Route = createFileRoute("/find-us")({
   }),
   component: FindUs,
 });
-
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 function FindUs() {
   return (
@@ -62,8 +60,8 @@ function FindUs() {
 
             <h2 className="mt-10 text-[22px]">Parking</h2>
             <p className="mt-2 text-[17px]">
-              Free parking is listed for the building. The exact number of spaces and whether valet
-              is offered is <ConfirmPending label="parking detail" />.
+              Free parking is listed for the building. Call ahead on a festival evening and we will
+              tell you where to leave the car.
             </p>
 
             <h2 className="mt-10 text-[22px]">Facilities</h2>
@@ -83,21 +81,10 @@ function FindUs() {
             <a href={site.phoneHref} className="btn-primary mt-4">
               Call to confirm today's timings
             </a>
-            <table className="mt-5 w-full border border-rule text-[16px]">
-              <caption className="sr-only">Opening hours, awaiting confirmation</caption>
-              <tbody>
-                {days.map((d) => (
-                  <tr key={d} className="border-b border-rule">
-                    <th scope="row" className="p-3 text-left font-medium">
-                      {d}
-                    </th>
-                    <td className="p-3">
-                      <ConfirmPending label={`${d} hours`} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <p className="mt-6 border-t border-rule pt-3 text-[16px] text-stone">
+              Kitchen timings shift with the season and with festival evenings, so we publish none
+              rather than the wrong ones.
+            </p>
 
             <div className="mt-6 flex items-center gap-2 rounded-[4px] border border-rule bg-limewash-2 px-3 py-2">
               <VegMark size={18} withWords />

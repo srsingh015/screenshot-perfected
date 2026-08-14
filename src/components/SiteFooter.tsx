@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { site, mapsUrl, imageDisclosure } from "@/data/site";
-import { ConfirmPending, VegMark, houndstoothStyle } from "@/components/dolce";
+import { VegMark, houndstoothStyle } from "@/components/dolce";
 
 export function SiteFooter() {
   return (
@@ -59,10 +59,9 @@ export function SiteFooter() {
           >
             Instagram @dolceby21st
           </a>
-          <p className="mt-4 text-[14px] text-pistachio-100">Hours</p>
-          <div className="mt-1">
-            <ConfirmPending label="Opening hours" />
-          </div>
+          <p className="mt-4 text-[14px] text-pistachio-100">
+            Hours vary by day and season — one call gets you today's timings.
+          </p>
           <a href={site.phoneHref} className="btn-secondary mt-3 border-limewash text-limewash">
             Call to confirm today's timings
           </a>
@@ -95,7 +94,7 @@ export function SiteFooter() {
         <div className="mx-auto w-full max-w-6xl space-y-2 text-[14px] text-pistachio-100">
           <p className="font-mono">FSSAI Lic. No. {site.fssai}</p>
           <p>
-            Prices are in ₹ and are <ConfirmPending label="tax inclusion" />
+            Prices are in ₹. Please ask for the current menu at the table.
           </p>
           <p>{imageDisclosure}</p>
           <p className="text-pistachio-400">

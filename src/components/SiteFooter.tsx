@@ -82,7 +82,7 @@ export function SiteFooter() {
               ["/privacy", "Privacy"],
             ].map(([to, label]) => (
               <li key={to}>
-                <Link to={to} className="underline underline-offset-4">
+                <Link to={to!} className="underline underline-offset-4">
                   {label}
                 </Link>
               </li>

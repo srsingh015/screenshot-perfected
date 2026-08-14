@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { site, ratings } from "@/data/site";
+import { site, type ratings } from "@/data/site";
 
 /* ── ConfirmPending ─────────────────────────────────────────────
    A missing fact must look missing. Never replaced by a guess. */
@@ -106,8 +106,7 @@ export function houndstoothStyle(): React.CSSProperties {
 }
 
 /* ── Ratings, always attributed and dated ─────────────────────── */
-export function RatingSource({ index }: { index: number }) {
-  const r = ratings[index];
+export function RatingSource({ r }: { r: (typeof ratings)[number] }) {
   return (
     <div className="card-dolce p-4">
       <p className="font-mono text-2xl">{r.score} ★</p>

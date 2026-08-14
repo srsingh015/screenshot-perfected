@@ -96,6 +96,9 @@ function UpwasPage() {
           </li>
           <li>{allergenLine}</li>
         </ul>
+        <div className="mt-8">
+          <PricesNotice />
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link to="/reserve" className="btn-primary">
             Reserve a table

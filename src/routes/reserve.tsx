@@ -29,14 +29,26 @@ const consentText = "I agree that Dolce may contact me about this reservation.";
 function Reserve() {
   const [form, setForm] = useState({ name: "", phone: "", date: "", time: "", party: "2" });
   const [consent, setConsent] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    phone?: string;
+    date?: string;
+    time?: string;
+    consent?: string;
+  }>({});
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    const next: Record<string, string> = {};
+    const next: {
+      name?: string;
+      phone?: string;
+      date?: string;
+      time?: string;
+      consent?: string;
+    } = {};
     if (!form.name.trim()) next.name = "We need a name for the booking";
     if (!/^[0-9+\s-]{10,}$/.test(form.phone.trim()))
       next.phone = "We need a phone number so we can confirm your table";

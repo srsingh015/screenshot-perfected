@@ -10,12 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PureVegRouteImport } from './routes/pure-veg'
+import { Route as ReserveRouteImport } from './routes/reserve'
 import { Route as MenuIndexRouteImport } from './routes/menu.index'
 import { Route as MenuSectionRouteImport } from './routes/menu.$section'
+import { Route as MenuUpwasRouteImport } from './routes/menu.upwas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PureVegRoute = PureVegRouteImport.update({
+  id: '/pure-veg',
+  path: '/pure-veg',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReserveRoute = ReserveRouteImport.update({
+  id: '/reserve',
+  path: '/reserve',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MenuIndexRoute = MenuIndexRouteImport.update({
@@ -28,34 +41,60 @@ const MenuSectionRoute = MenuSectionRouteImport.update({
   path: '/menu/$section',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MenuUpwasRoute = MenuUpwasRouteImport.update({
+  id: '/menu/upwas',
+  path: '/menu/upwas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/pure-veg': typeof PureVegRoute
+  '/reserve': typeof ReserveRoute
   '/menu/$section': typeof MenuSectionRoute
+  '/menu/upwas': typeof MenuUpwasRoute
   '/menu/': typeof MenuIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/pure-veg': typeof PureVegRoute
+  '/reserve': typeof ReserveRoute
   '/menu/$section': typeof MenuSectionRoute
+  '/menu/upwas': typeof MenuUpwasRoute
   '/menu': typeof MenuIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/pure-veg': typeof PureVegRoute
+  '/reserve': typeof ReserveRoute
   '/menu/$section': typeof MenuSectionRoute
+  '/menu/upwas': typeof MenuUpwasRoute
   '/menu/': typeof MenuIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/menu/$section' | '/menu/'
+  fullPaths:
+    '/' | '/pure-veg' | '/reserve' | '/menu/$section' | '/menu/upwas' | '/menu/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/menu/$section' | '/menu'
-  id: '__root__' | '/' | '/menu/$section' | '/menu/'
+  to:
+    '/' | '/pure-veg' | '/reserve' | '/menu/$section' | '/menu/upwas' | '/menu'
+  id:
+    | '__root__'
+    | '/'
+    | '/pure-veg'
+    | '/reserve'
+    | '/menu/$section'
+    | '/menu/upwas'
+    | '/menu/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PureVegRoute: typeof PureVegRoute
+  ReserveRoute: typeof ReserveRoute
   MenuSectionRoute: typeof MenuSectionRoute
+  MenuUpwasRoute: typeof MenuUpwasRoute
   MenuIndexRoute: typeof MenuIndexRoute
 }
 
@@ -66,6 +105,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pure-veg': {
+      id: '/pure-veg'
+      path: '/pure-veg'
+      fullPath: '/pure-veg'
+      preLoaderRoute: typeof PureVegRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reserve': {
+      id: '/reserve'
+      path: '/reserve'
+      fullPath: '/reserve'
+      preLoaderRoute: typeof ReserveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/menu/': {
@@ -82,12 +135,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MenuSectionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/menu/upwas': {
+      id: '/menu/upwas'
+      path: '/menu/upwas'
+      fullPath: '/menu/upwas'
+      preLoaderRoute: typeof MenuUpwasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PureVegRoute: PureVegRoute,
+  ReserveRoute: ReserveRoute,
   MenuSectionRoute: MenuSectionRoute,
+  MenuUpwasRoute: MenuUpwasRoute,
   MenuIndexRoute: MenuIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -157,7 +157,7 @@ function MenuPage() {
                       {i.section}
                     </Link>
                     <TravelBadge travels={i.travels} />
-                    <ConfirmPending label="price" />
+
                   </div>
                 </li>
               ))}

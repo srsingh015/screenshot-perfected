@@ -201,9 +201,6 @@ function MenuPage() {
                                     {i.signature ? (
                                       <span className="font-mono text-[13px] text-amarena">★</span>
                                     ) : null}
-                                    <span className="ml-auto">
-                                      <ConfirmPending label="price" />
-                                    </span>
                                   </div>
                                   {i.desc ? (
                                     <p className="mt-1 text-[16px] text-stone">{i.desc}</p>

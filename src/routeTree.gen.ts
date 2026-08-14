@@ -10,33 +10,193 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CelebrationsRouteImport } from './routes/celebrations'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as FindUsRouteImport } from './routes/find-us'
+import { Route as OrderOnlineRouteImport } from './routes/order-online'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PureVegRouteImport } from './routes/pure-veg'
+import { Route as ReserveRouteImport } from './routes/reserve'
+import { Route as TheRoomRouteImport } from './routes/the-room'
+import { Route as MenuIndexRouteImport } from './routes/menu.index'
+import { Route as MenuSectionRouteImport } from './routes/menu.$section'
+import { Route as MenuUpwasRouteImport } from './routes/menu.upwas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CelebrationsRoute = CelebrationsRouteImport.update({
+  id: '/celebrations',
+  path: '/celebrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindUsRoute = FindUsRouteImport.update({
+  id: '/find-us',
+  path: '/find-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrderOnlineRoute = OrderOnlineRouteImport.update({
+  id: '/order-online',
+  path: '/order-online',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PureVegRoute = PureVegRouteImport.update({
+  id: '/pure-veg',
+  path: '/pure-veg',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReserveRoute = ReserveRouteImport.update({
+  id: '/reserve',
+  path: '/reserve',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TheRoomRoute = TheRoomRouteImport.update({
+  id: '/the-room',
+  path: '/the-room',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuIndexRoute = MenuIndexRouteImport.update({
+  id: '/menu/',
+  path: '/menu/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuSectionRoute = MenuSectionRouteImport.update({
+  id: '/menu/$section',
+  path: '/menu/$section',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuUpwasRoute = MenuUpwasRouteImport.update({
+  id: '/menu/upwas',
+  path: '/menu/upwas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/celebrations': typeof CelebrationsRoute
+  '/faq': typeof FaqRoute
+  '/find-us': typeof FindUsRoute
+  '/order-online': typeof OrderOnlineRoute
+  '/privacy': typeof PrivacyRoute
+  '/pure-veg': typeof PureVegRoute
+  '/reserve': typeof ReserveRoute
+  '/the-room': typeof TheRoomRoute
+  '/menu/$section': typeof MenuSectionRoute
+  '/menu/upwas': typeof MenuUpwasRoute
+  '/menu/': typeof MenuIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/celebrations': typeof CelebrationsRoute
+  '/faq': typeof FaqRoute
+  '/find-us': typeof FindUsRoute
+  '/order-online': typeof OrderOnlineRoute
+  '/privacy': typeof PrivacyRoute
+  '/pure-veg': typeof PureVegRoute
+  '/reserve': typeof ReserveRoute
+  '/the-room': typeof TheRoomRoute
+  '/menu/$section': typeof MenuSectionRoute
+  '/menu/upwas': typeof MenuUpwasRoute
+  '/menu': typeof MenuIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/celebrations': typeof CelebrationsRoute
+  '/faq': typeof FaqRoute
+  '/find-us': typeof FindUsRoute
+  '/order-online': typeof OrderOnlineRoute
+  '/privacy': typeof PrivacyRoute
+  '/pure-veg': typeof PureVegRoute
+  '/reserve': typeof ReserveRoute
+  '/the-room': typeof TheRoomRoute
+  '/menu/$section': typeof MenuSectionRoute
+  '/menu/upwas': typeof MenuUpwasRoute
+  '/menu/': typeof MenuIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/celebrations'
+    | '/faq'
+    | '/find-us'
+    | '/order-online'
+    | '/privacy'
+    | '/pure-veg'
+    | '/reserve'
+    | '/the-room'
+    | '/menu/$section'
+    | '/menu/upwas'
+    | '/menu/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/celebrations'
+    | '/faq'
+    | '/find-us'
+    | '/order-online'
+    | '/privacy'
+    | '/pure-veg'
+    | '/reserve'
+    | '/the-room'
+    | '/menu/$section'
+    | '/menu/upwas'
+    | '/menu'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/celebrations'
+    | '/faq'
+    | '/find-us'
+    | '/order-online'
+    | '/privacy'
+    | '/pure-veg'
+    | '/reserve'
+    | '/the-room'
+    | '/menu/$section'
+    | '/menu/upwas'
+    | '/menu/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CelebrationsRoute: typeof CelebrationsRoute
+  FaqRoute: typeof FaqRoute
+  FindUsRoute: typeof FindUsRoute
+  OrderOnlineRoute: typeof OrderOnlineRoute
+  PrivacyRoute: typeof PrivacyRoute
+  PureVegRoute: typeof PureVegRoute
+  ReserveRoute: typeof ReserveRoute
+  TheRoomRoute: typeof TheRoomRoute
+  MenuSectionRoute: typeof MenuSectionRoute
+  MenuUpwasRoute: typeof MenuUpwasRoute
+  MenuIndexRoute: typeof MenuIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +208,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/celebrations': {
+      id: '/celebrations'
+      path: '/celebrations'
+      fullPath: '/celebrations'
+      preLoaderRoute: typeof CelebrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-us': {
+      id: '/find-us'
+      path: '/find-us'
+      fullPath: '/find-us'
+      preLoaderRoute: typeof FindUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/order-online': {
+      id: '/order-online'
+      path: '/order-online'
+      fullPath: '/order-online'
+      preLoaderRoute: typeof OrderOnlineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pure-veg': {
+      id: '/pure-veg'
+      path: '/pure-veg'
+      fullPath: '/pure-veg'
+      preLoaderRoute: typeof PureVegRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reserve': {
+      id: '/reserve'
+      path: '/reserve'
+      fullPath: '/reserve'
+      preLoaderRoute: typeof ReserveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-room': {
+      id: '/the-room'
+      path: '/the-room'
+      fullPath: '/the-room'
+      preLoaderRoute: typeof TheRoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu/': {
+      id: '/menu/'
+      path: '/menu'
+      fullPath: '/menu/'
+      preLoaderRoute: typeof MenuIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu/$section': {
+      id: '/menu/$section'
+      path: '/menu/$section'
+      fullPath: '/menu/$section'
+      preLoaderRoute: typeof MenuSectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu/upwas': {
+      id: '/menu/upwas'
+      path: '/menu/upwas'
+      fullPath: '/menu/upwas'
+      preLoaderRoute: typeof MenuUpwasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CelebrationsRoute: CelebrationsRoute,
+  FaqRoute: FaqRoute,
+  FindUsRoute: FindUsRoute,
+  OrderOnlineRoute: OrderOnlineRoute,
+  PrivacyRoute: PrivacyRoute,
+  PureVegRoute: PureVegRoute,
+  ReserveRoute: ReserveRoute,
+  TheRoomRoute: TheRoomRoute,
+  MenuSectionRoute: MenuSectionRoute,
+  MenuUpwasRoute: MenuUpwasRoute,
+  MenuIndexRoute: MenuIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

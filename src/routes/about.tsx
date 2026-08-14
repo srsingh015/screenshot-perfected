@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import roomHero from "@/assets/room-hero.jpg";
 import { site, imageDisclosure } from "@/data/site";
 import { menu, totalItems } from "@/data/menu";
-import { ConfirmPending, Eyebrow, Section, TerrazzoDivider, VegMark } from "@/components/dolce";
+import { Eyebrow, Section, TerrazzoDivider, VegMark } from "@/components/dolce";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -78,15 +78,6 @@ function About() {
           going to invent a founding year, a chef, or an award. These come from the restaurant or
           they do not appear.
         </p>
-        <ul className="mt-5 flex flex-wrap gap-3">
-          {["Year opened", "Founders", "Head chef", "Group and sister venues", "Signature classes schedule"].map(
-            (l) => (
-              <li key={l}>
-                <ConfirmPending label={l} />
-              </li>
-            ),
-          )}
-        </ul>
         <p className="mt-6 text-[16px] text-stone">
           Legal name: {site.listedName} · FSSAI Lic. No. {site.fssai}
         </p>

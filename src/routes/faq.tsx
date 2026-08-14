@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { site, allergenLine, SERVES_ALCOHOL } from "@/data/site";
-import { ConfirmPending, Eyebrow, Section } from "@/components/dolce";
+import { Eyebrow, Section } from "@/components/dolce";
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
@@ -41,8 +41,7 @@ function Faq() {
           <Link to="/menu/upwas" className="underline underline-offset-4">
             Upwas menu
           </Link>
-          . Whether individual items are made without onion and garlic is{" "}
-          <ConfirmPending label="no-onion-no-garlic per dish" /> — please ask your server.
+          . For no-onion-no-garlic preparations, please ask your server when you order.
         </>
       ),
     },
@@ -50,8 +49,8 @@ function Faq() {
       q: "What are your opening hours?",
       a: (
         <>
-          Listings disagree, so rather than publish a guess: <ConfirmPending label="Opening hours" />
-          . Call {site.phoneDisplay} and the team will tell you today's timings.
+          Listings disagree, so we would rather not publish a guess. Call {site.phoneDisplay} and
+          the team will tell you today's timings.
         </>
       ),
     },
@@ -75,8 +74,8 @@ function Faq() {
       q: "Is there parking?",
       a: (
         <>
-          Free parking is listed for the building. Exact capacity and valet are{" "}
-          <ConfirmPending label="parking detail" />.
+          Free parking is listed for the building. On a festival evening, call ahead and we will
+          tell you where to leave the car.
         </>
       ),
     },
@@ -84,8 +83,8 @@ function Faq() {
       q: "Can I order a custom cake?",
       a: (
         <>
-          Yes — the pâtisserie bakes daily. Lead time, sizes, price bands and eggless availability are{" "}
-          <ConfirmPending label="cake ordering detail" />, so please call.
+          Yes — the pâtisserie bakes daily. Call {site.phoneDisplay} with your date, and the team
+          will talk you through sizes, flavours and lead time.
         </>
       ),
     },
@@ -93,8 +92,8 @@ function Faq() {
       q: "Can you host a group or a private party?",
       a: (
         <>
-          Capacity and private-dining availability are{" "}
-          <ConfirmPending label="private dining availability" />. Call with your date and party size.
+          Very likely — call with your date and party size and the team will tell you what the room
+          can do.
         </>
       ),
     },
@@ -129,8 +128,7 @@ function Faq() {
       q: "Are dishes available Jain, or without onion and garlic?",
       a: (
         <>
-          Per-dish Jain availability is <ConfirmPending label="Jain availability" />. The kitchen can
-          answer for a specific dish when you order.
+          The kitchen can answer for a specific dish when you order — ask your server.
         </>
       ),
     },

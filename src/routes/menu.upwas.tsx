@@ -3,7 +3,6 @@ import upwasImg from "@/assets/upwas.jpg";
 import { getSection } from "@/data/menu";
 import { site, allergenLine, imageDisclosure } from "@/data/site";
 import {
-  ConfirmPending,
   Eyebrow,
   Section,
   TerrazzoDivider,
@@ -89,11 +88,9 @@ function UpwasPage() {
         <h2 className="text-[30px]">Before you order</h2>
         <ul className="measure mt-4 space-y-3 text-[17px]">
           <li>
-            Whether an item is made without onion and garlic is{" "}
-            <ConfirmPending label="no-onion-no-garlic per dish" /> — please ask your server, who will
-            check with the kitchen.
+            For no-onion-no-garlic or Jain preparations, ask your server when you order — the kitchen
+            will tell you what it can do for a specific dish.
           </li>
-          <li>Jain availability per dish is <ConfirmPending label="Jain availability" />.</li>
           <li>{allergenLine}</li>
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">

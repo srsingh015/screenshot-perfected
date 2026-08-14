@@ -10,8 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CelebrationsRouteImport } from './routes/celebrations'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as FindUsRouteImport } from './routes/find-us'
 import { Route as OrderOnlineRouteImport } from './routes/order-online'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PureVegRouteImport } from './routes/pure-veg'
 import { Route as ReserveRouteImport } from './routes/reserve'
 import { Route as TheRoomRouteImport } from './routes/the-room'
@@ -24,14 +28,34 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CelebrationsRoute = CelebrationsRouteImport.update({
   id: '/celebrations',
   path: '/celebrations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindUsRoute = FindUsRouteImport.update({
+  id: '/find-us',
+  path: '/find-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrderOnlineRoute = OrderOnlineRouteImport.update({
   id: '/order-online',
   path: '/order-online',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PureVegRoute = PureVegRouteImport.update({
@@ -67,8 +91,12 @@ const MenuUpwasRoute = MenuUpwasRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/celebrations': typeof CelebrationsRoute
+  '/faq': typeof FaqRoute
+  '/find-us': typeof FindUsRoute
   '/order-online': typeof OrderOnlineRoute
+  '/privacy': typeof PrivacyRoute
   '/pure-veg': typeof PureVegRoute
   '/reserve': typeof ReserveRoute
   '/the-room': typeof TheRoomRoute
@@ -78,8 +106,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/celebrations': typeof CelebrationsRoute
+  '/faq': typeof FaqRoute
+  '/find-us': typeof FindUsRoute
   '/order-online': typeof OrderOnlineRoute
+  '/privacy': typeof PrivacyRoute
   '/pure-veg': typeof PureVegRoute
   '/reserve': typeof ReserveRoute
   '/the-room': typeof TheRoomRoute
@@ -90,8 +122,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/celebrations': typeof CelebrationsRoute
+  '/faq': typeof FaqRoute
+  '/find-us': typeof FindUsRoute
   '/order-online': typeof OrderOnlineRoute
+  '/privacy': typeof PrivacyRoute
   '/pure-veg': typeof PureVegRoute
   '/reserve': typeof ReserveRoute
   '/the-room': typeof TheRoomRoute
@@ -103,8 +139,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/celebrations'
+    | '/faq'
+    | '/find-us'
     | '/order-online'
+    | '/privacy'
     | '/pure-veg'
     | '/reserve'
     | '/the-room'
@@ -114,8 +154,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/celebrations'
+    | '/faq'
+    | '/find-us'
     | '/order-online'
+    | '/privacy'
     | '/pure-veg'
     | '/reserve'
     | '/the-room'
@@ -125,8 +169,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/celebrations'
+    | '/faq'
+    | '/find-us'
     | '/order-online'
+    | '/privacy'
     | '/pure-veg'
     | '/reserve'
     | '/the-room'
@@ -137,8 +185,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CelebrationsRoute: typeof CelebrationsRoute
+  FaqRoute: typeof FaqRoute
+  FindUsRoute: typeof FindUsRoute
   OrderOnlineRoute: typeof OrderOnlineRoute
+  PrivacyRoute: typeof PrivacyRoute
   PureVegRoute: typeof PureVegRoute
   ReserveRoute: typeof ReserveRoute
   TheRoomRoute: typeof TheRoomRoute
@@ -156,6 +208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/celebrations': {
       id: '/celebrations'
       path: '/celebrations'
@@ -163,11 +222,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CelebrationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-us': {
+      id: '/find-us'
+      path: '/find-us'
+      fullPath: '/find-us'
+      preLoaderRoute: typeof FindUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/order-online': {
       id: '/order-online'
       path: '/order-online'
       fullPath: '/order-online'
       preLoaderRoute: typeof OrderOnlineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pure-veg': {
@@ -217,8 +297,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CelebrationsRoute: CelebrationsRoute,
+  FaqRoute: FaqRoute,
+  FindUsRoute: FindUsRoute,
   OrderOnlineRoute: OrderOnlineRoute,
+  PrivacyRoute: PrivacyRoute,
   PureVegRoute: PureVegRoute,
   ReserveRoute: ReserveRoute,
   TheRoomRoute: TheRoomRoute,

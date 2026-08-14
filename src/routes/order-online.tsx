@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { menu } from "@/data/menu";
-import { site } from "@/data/site";
+import { site, ratings } from "@/data/site";
 import { Eyebrow, RatingSource, Section, TravelBadge } from "@/components/dolce";
-import { ratings } from "@/data/site";
 
 export const Route = createFileRoute("/order-online")({
   head: () => ({

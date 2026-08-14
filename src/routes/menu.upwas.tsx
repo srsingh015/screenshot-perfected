@@ -64,9 +64,7 @@ function UpwasPage() {
                   <p className="text-[18px] font-medium">{i.name}</p>
                 </div>
                 {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
-                <p className="mt-3">
-                  <ConfirmPending label="price" />
-                </p>
+
               </li>
             ))}
           </ul>

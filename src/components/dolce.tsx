@@ -1,18 +1,92 @@
 import { type ReactNode } from "react";
 import { site, type ratings } from "@/data/site";
 
-/* ── ConfirmPending ─────────────────────────────────────────────
-   A missing fact must look missing. Never replaced by a guess. */
-export function ConfirmPending({ label }: { label: string }) {
+/* ── Pending states ─────────────────────────────────────────────
+   Prices render as an em-dash in the numeral column, with a single
+   quiet notice per page. Timings get one hairline note. Everything
+   else unconfirmed is omitted entirely — never placeholdered. */
+
+export function PriceDash() {
   return (
-    <span
-      className="inline-flex items-center gap-1 rounded-[4px] border border-dashed border-caramel-600 bg-caramel-100 px-2 py-0.5 font-mono text-[15px] text-ink"
-      title={`Awaiting confirmation from Dolce. Call ${site.phoneDisplay}.`}
-      aria-label={`${label} — to be confirmed. Please call ${site.phoneDisplay}.`}
-      style={{ cursor: "help" }}
-    >
-      ⌛ To confirm — {label}
+    <span className="num text-stone" aria-label="Price not published">
+      —
     </span>
+  );
+}
+
+export function Notice({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <p className="flex flex-wrap items-baseline gap-3 border-t border-rule pt-3 text-[16px] text-stone">
+      <span className="label shrink-0 text-pistachio-600">{label}</span>
+      <span className="measure">{children}</span>
+    </p>
+  );
+}
+
+export function PricesNotice() {
+  return (
+    <Notice label="Prices">
+      Our full price list is being finalised for the website. Please call{" "}
+      <a href={site.phoneHref} className="text-ink underline underline-offset-4">
+        {site.phoneDisplay}
+      </a>{" "}
+      or ask for a menu at the table.
+    </Notice>
+  );
+}
+
+export function TimingsNotice() {
+  return (
+    <div className="border-t border-rule pt-3">
+      <p className="flex flex-wrap items-baseline gap-3 text-[16px] text-stone">
+        <span className="label shrink-0 text-pistachio-600">Timings</span>
+        <span className="measure">
+          We are confirming our published hours. Please call to check today’s timings.
+        </span>
+      </p>
+      <a href={site.phoneHref} className="link-rule mt-3 inline-block text-ink">
+        Call {site.phoneDisplay}
+      </a>
+    </div>
+  );
+}
+
+/* ── Section label device: 01 ——————— THE PASTRY COUNTER ─────── */
+export function SectionLabel({
+  n,
+  children,
+  tone = "stone",
+}: {
+  n?: string;
+  children: ReactNode;
+  tone?: "stone" | "light";
+}) {
+  return (
+    <div
+      className={`flex items-center gap-4 ${tone === "light" ? "text-pistachio-100" : "text-stone"}`}
+    >
+      {n ? <span className="label text-pistachio-600">{n}</span> : null}
+      <span
+        aria-hidden="true"
+        className={`h-px flex-1 ${tone === "light" ? "bg-pistachio-400/50" : "bg-rule"}`}
+      />
+      <span className="label">{children}</span>
+    </div>
+  );
+}
+
+export function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex items-center gap-4 text-stone">
+      <span className="label">{children}</span>
+      <span aria-hidden="true" className="h-px flex-1 bg-rule" />
+    </div>
   );
 }
 
@@ -41,7 +115,7 @@ export function VegMark({
           y="1.5"
           width="21"
           height="21"
-          rx="2"
+          rx="0"
           fill="none"
           stroke="var(--veg)"
           strokeWidth="2.5"
@@ -49,46 +123,54 @@ export function VegMark({
         <circle cx="12" cy="12" r="6" fill="var(--veg)" />
       </svg>
       {withWords ? (
-        <span className="eyebrow text-[12px] leading-tight sm:text-[13px]">
-          100% Vegetarian Kitchen
-        </span>
+        <span className="label">100% Vegetarian Kitchen</span>
       ) : null}
     </span>
   );
 }
 
-/* ── Terrazzo: deterministic SVG, the floor of the room ───────── */
+/* ── Terrazzo: deterministic SVG, 12%, used in three places only ── */
 function chips(seed: number, n: number) {
   let s = seed;
   const rnd = () => ((s = (s * 1103515245 + 12345) % 2147483648) / 2147483648);
-  const fills = ["var(--terrazzo)", "var(--pistachio-100)", "var(--caramel-100)", "var(--rule)"];
+  const fills = ["var(--terrazzo)", "var(--pistachio-400)", "var(--caramel-600)", "var(--stone)"];
   return Array.from({ length: n }, (_, i) => ({
-    x: rnd() * 340,
-    y: rnd() * 340,
-    r: 2 + rnd() * 7,
-    rot: rnd() * 90,
+    cx: rnd() * 340,
+    cy: rnd() * 340,
+    rx: 4 + rnd() * 5,
+    ry: 3 + rnd() * 4,
+    rot: rnd() * 180,
     fill: fills[i % fills.length],
   }));
 }
 
-export function TerrazzoDivider({ className = "" }: { className?: string }) {
+export function TerrazzoDivider({
+  className = "",
+  height = 64,
+}: {
+  className?: string;
+  height?: number;
+}) {
   return (
-    <div aria-hidden="true" className={`h-16 w-full overflow-hidden ${className}`}>
+    <div
+      aria-hidden="true"
+      className={`w-full overflow-hidden bg-limewash-2 ${className}`}
+      style={{ height }}
+    >
       <svg className="h-full w-full" preserveAspectRatio="xMidYMid slice">
         <defs>
           <pattern id="terrazzo" width="340" height="340" patternUnits="userSpaceOnUse">
             <rect width="340" height="340" fill="var(--limewash-2)" />
-            <g opacity="0.55">
-              {chips(7, 90).map((c, i) => (
-                <rect
+            <g opacity="0.12">
+              {chips(7, 110).map((c, i) => (
+                <ellipse
                   key={i}
-                  x={c.x}
-                  y={c.y}
-                  width={c.r * 2}
-                  height={c.r}
-                  rx="1"
+                  cx={c.cx}
+                  cy={c.cy}
+                  rx={c.rx}
+                  ry={c.ry}
                   fill={c.fill}
-                  transform={`rotate(${c.rot} ${c.x} ${c.y})`}
+                  transform={`rotate(${c.rot} ${c.cx} ${c.cy})`}
                 />
               ))}
             </g>
@@ -100,21 +182,24 @@ export function TerrazzoDivider({ className = "" }: { className?: string }) {
   );
 }
 
+/* Houndstooth: reservation panel only, 3% */
 export function houndstoothStyle(): React.CSSProperties {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g fill='%23241C17' fill-opacity='0.06'><path d='M0 0h12v12H0z'/><path d='M12 12h12v12H12z'/><path d='M12 0l12 12H12z'/><path d='M0 12l12 12H0z'/></g></svg>`;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g fill='%23241C17' fill-opacity='0.03'><path d='M0 0h12v12H0z'/><path d='M12 12h12v12H12z'/><path d='M12 0l12 12H12z'/><path d='M0 12l12 12H0z'/></g></svg>`;
   return { backgroundImage: `url("data:image/svg+xml,${svg}")`, backgroundRepeat: "repeat" };
 }
 
-/* ── Ratings, always attributed and dated ─────────────────────── */
+/* ── Ratings, always attributed and dated — as ruled rows ────── */
 export function RatingSource({ r }: { r: (typeof ratings)[number] }) {
   return (
-    <div className="card-dolce p-4">
-      <p className="font-mono text-2xl">{r.score} ★</p>
-      <p className="mt-1 text-[15px] font-medium">{r.platform}</p>
-      <p className="text-[14px] text-stone">
+    <div className="index-row grid-cols-[auto_1fr_auto] gap-4">
+      <p className="num text-[22px]">{r.score} ★</p>
+      <div>
+        <p className="text-[17px]">{r.platform}</p>
+        {"sub" in r && r.sub ? <p className="text-[15px] text-stone">{r.sub}</p> : null}
+      </div>
+      <p className="label text-stone">
         {r.count} · read {r.read}
       </p>
-      {"sub" in r && r.sub ? <p className="mt-2 text-[14px] text-stone">{r.sub}</p> : null}
     </div>
   );
 }
@@ -125,34 +210,36 @@ export function Section({
   className = "",
   tinted = false,
   id,
+  scale = 1,
+  bleed = false,
 }: {
   children: ReactNode;
   className?: string;
   tinted?: boolean;
   id?: string;
+  /** deliberate variation in vertical rhythm: 0.7, 1 or 1.4 */
+  scale?: number;
+  bleed?: boolean;
 }) {
   return (
     <section
       id={id}
-      className={`${tinted ? "bg-limewash-2" : ""} px-5 py-14 sm:px-8 sm:py-20 ${className}`}
+      className={`${tinted ? "bg-limewash-2" : ""} ${className}`}
+      style={{
+        paddingTop: `calc(var(--space-section) * ${scale})`,
+        paddingBottom: `calc(var(--space-section) * ${scale})`,
+      }}
     >
-      <div className="mx-auto w-full max-w-6xl">{children}</div>
+      <div className={bleed ? "" : "shell"}>{children}</div>
     </section>
   );
 }
 
-export function Eyebrow({ children }: { children: ReactNode }) {
-  return <p className="eyebrow text-pistachio-600">{children}</p>;
-}
-
+/* Travels-well marker, set as label text — never a coloured pill */
 export function TravelBadge({ travels }: { travels: "well" | "table" }) {
-  return travels === "table" ? (
-    <span className="rounded-[4px] bg-pistachio-100 px-2 py-0.5 font-mono text-[13px] text-pistachio-800">
-      Best at the table
-    </span>
-  ) : (
-    <span className="rounded-[4px] bg-limewash-2 px-2 py-0.5 font-mono text-[13px] text-stone">
-      Travels well
+  return (
+    <span className="label text-stone">
+      {travels === "table" ? "Best at the table" : "Travels well"}
     </span>
   );
 }

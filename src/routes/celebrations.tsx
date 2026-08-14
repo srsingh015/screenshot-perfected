@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import dessertImg from "@/assets/dessert.jpg";
 import { site, imageDisclosure } from "@/data/site";
-import { ConfirmPending, Eyebrow, Section, TerrazzoDivider } from "@/components/dolce";
+import { Eyebrow, Section, TerrazzoDivider } from "@/components/dolce";
 
 export const Route = createFileRoute("/celebrations")({
   head: () => ({
@@ -73,29 +73,28 @@ function Celebrations() {
           Everything below has to come from the restaurant rather than from us, so we have left it
           blank rather than guessed. One phone call settles all of it.
         </p>
-        <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+        <ul className="mt-10 border-b border-rule">
           {[
             "Lead time for a custom cake",
             "Cake sizes and servings",
-            "Price bands",
             "Eggless availability",
             "Flavour list for custom orders",
             "Advance payment and cancellation",
-          ].map((label) => (
-            <div key={label} className="card-dolce p-4">
-              <dt className="text-[16px] font-medium">{label}</dt>
-              <dd className="mt-2">
-                <ConfirmPending label={label} />
-              </dd>
-            </div>
+          ].map((label, idx) => (
+            <li key={label} className="index-row grid-cols-[auto_1fr] gap-6">
+              <span className="label text-pistachio-600">{String(idx + 1).padStart(2, "0")}</span>
+              <span className="text-[17px]">{label}</span>
+            </li>
           ))}
-        </dl>
+        </ul>
+        <p className="mt-6 text-[16px] text-stone">
+          All five are settled in one phone call — the pâtisserie answers these daily.
+        </p>
 
         <h2 className="mt-12 text-[30px]">Group bookings & private dining</h2>
         <p className="measure mt-3">
           The room is double-height with a mezzanine above the floor. Seating capacity, mezzanine
-          capacity and whether a section can be booked privately are{" "}
-          <ConfirmPending label="private dining availability" />. Call us with your date and the
+          capacity and private bookings depend on the evening. Call us with your date and the
           number of guests and the team will tell you what is possible.
         </p>
         <a href={site.phoneHref} className="btn-primary mt-6">

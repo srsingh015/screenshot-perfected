@@ -2,9 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getSection, menu } from "@/data/menu";
 import { allergenLine } from "@/data/site";
 import {
-  ConfirmPending,
-  Eyebrow,
+  PriceDash,
+  PricesNotice,
   Section,
+  SectionLabel,
   TravelBadge,
   VegMark,
 } from "@/components/dolce";
@@ -44,58 +45,58 @@ function SectionPage() {
 
   return (
     <Section>
-      <Eyebrow>
+      <SectionLabel>
         <Link to="/menu">Menu</Link> · {section.group}
-      </Eyebrow>
-      <div className="mt-2 flex flex-wrap items-center gap-3">
-        <VegMark size={20} withWords />
+      </SectionLabel>
+      <h1 className="display mt-8">{section.name}</h1>
+      <div className="mt-8 flex flex-wrap items-center gap-6">
+        <span className="num text-[16px] text-stone">{section.count} dishes</span>
+        <VegMark size={16} withWords />
         <TravelBadge travels={section.travels} />
       </div>
-      <h1 className="mt-3 text-[38px] sm:text-[52px]">{section.name}</h1>
-      <p className="font-mono text-[15px] text-stone">{section.count} dishes · all vegetarian</p>
-      {section.note ? <p className="measure mt-3 text-[17px]">{section.note}</p> : null}
-      <p className="mt-4 flex flex-wrap items-center gap-2 text-[16px] text-stone">
-        Prices and portions for this section are <ConfirmPending label="prices & portions" />
-      </p>
+      {section.note ? <p className="measure mt-8 text-[19px]">{section.note}</p> : null}
 
-      <ul className="mt-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+      <div className="mt-[var(--space-block)] border-b border-rule lg:columns-2 lg:gap-[calc(var(--gutter)*3)]">
         {section.items.map((i) => (
-          <li key={i.id} className="card-dolce p-4">
-            <div className="flex flex-wrap items-baseline gap-2">
-              <span className="text-[18px] font-medium">{i.name}</span>
-              {i.signature ? (
-                <span className="font-mono text-[13px] text-amarena">Signature</span>
-              ) : null}
+          <div
+            key={i.id}
+            className="index-row grid-cols-[1fr_auto] gap-6 break-inside-avoid hover:bg-pistachio-100"
+          >
+            <div>
+              <p className="text-[20px]" style={{ fontFamily: "var(--font-display)" }}>
+                {i.signature ? <span className="text-amarena">∗ </span> : null}
+                {i.name}
+              </p>
+              {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
             </div>
-            {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
-          </li>
+            <PriceDash />
+          </div>
         ))}
-      </ul>
+      </div>
 
+      <div className="mt-10 space-y-3">
+        <PricesNotice />
+        <p className="text-[16px] text-stone">{allergenLine}</p>
+      </div>
 
-      <p className="mt-6 text-[15px] text-stone">{allergenLine}</p>
-
-      <div className="mt-8 flex flex-wrap gap-3">
+      <div className="mt-[var(--space-block)] flex flex-wrap items-center gap-8">
         <Link to="/reserve" className="btn-primary">
           Reserve a table
         </Link>
-        <Link to="/menu" className="btn-secondary">
+        <Link to="/menu" className="link-rule text-ink">
           Back to the full menu
         </Link>
       </div>
 
-      <nav className="mt-10" aria-label="Other sections">
-        <p className="eyebrow text-stone">More in {section.group}</p>
-        <ul className="mt-3 flex flex-wrap gap-2">
+      <nav className="mt-[var(--space-block)]" aria-label="Other sections">
+        <SectionLabel>More in {section.group}</SectionLabel>
+        <ul className="mt-6 border-b border-rule">
           {others.map((s) => (
-            <li key={s.slug}>
-              <Link
-                to="/menu/$section"
-                params={{ section: s.slug }}
-                className="inline-block rounded-[4px] border border-rule bg-limewash-2 px-3 py-2 text-[15px]"
-              >
+            <li key={s.slug} className="index-row grid-cols-[1fr_auto] gap-6">
+              <Link to="/menu/$section" params={{ section: s.slug }} className="text-[19px]">
                 {s.name}
               </Link>
+              <span className="num text-[15px] text-stone">{s.count}</span>
             </li>
           ))}
         </ul>

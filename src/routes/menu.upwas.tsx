@@ -3,8 +3,9 @@ import upwasImg from "@/assets/upwas.jpg";
 import { getSection } from "@/data/menu";
 import { site, allergenLine, imageDisclosure } from "@/data/site";
 import {
-  ConfirmPending,
   Eyebrow,
+  PriceDash,
+  PricesNotice,
   Section,
   TerrazzoDivider,
   VegMark,
@@ -56,15 +57,16 @@ function UpwasPage() {
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:items-start">
-          <ul className="grid gap-3">
+          <ul className="border-b border-rule">
             {section.items.map((i) => (
-              <li key={i.id} className="card-dolce p-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <VegMark size={14} />
-                  <p className="text-[18px] font-medium">{i.name}</p>
+              <li key={i.id} className="index-row grid-cols-[1fr_auto] gap-6">
+                <div>
+                  <p className="text-[20px]" style={{ fontFamily: "var(--font-display)" }}>
+                    {i.name}
+                  </p>
+                  {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
                 </div>
-                {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
-
+                <PriceDash />
               </li>
             ))}
           </ul>
@@ -89,13 +91,14 @@ function UpwasPage() {
         <h2 className="text-[30px]">Before you order</h2>
         <ul className="measure mt-4 space-y-3 text-[17px]">
           <li>
-            Whether an item is made without onion and garlic is{" "}
-            <ConfirmPending label="no-onion-no-garlic per dish" /> — please ask your server, who will
-            check with the kitchen.
+            For no-onion-no-garlic or Jain preparations, ask your server when you order — the kitchen
+            will tell you what it can do for a specific dish.
           </li>
-          <li>Jain availability per dish is <ConfirmPending label="Jain availability" />.</li>
           <li>{allergenLine}</li>
         </ul>
+        <div className="mt-8">
+          <PricesNotice />
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link to="/reserve" className="btn-primary">
             Reserve a table

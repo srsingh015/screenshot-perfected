@@ -68,10 +68,10 @@ function OrderOnline() {
           <p className="mt-1 text-[16px] text-stone">
             We would rather you had them at their best.
           </p>
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-4 border-b border-rule">
             {table.map((s) => (
-              <li key={s.slug} className="card-dolce flex flex-wrap items-center gap-3 p-3">
-                <Link to="/menu/$section" params={{ section: s.slug }} className="text-[16px] font-medium">
+              <li key={s.slug} className="index-row grid-cols-[1fr_auto] gap-6">
+                <Link to="/menu/$section" params={{ section: s.slug }} className="text-[19px]">
                   {s.name}
                 </Link>
                 <TravelBadge travels="table" />

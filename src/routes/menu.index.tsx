@@ -3,10 +3,10 @@ import { useMemo, useState } from "react";
 import { menu, allItems, totalItems, groupLabels } from "@/data/menu";
 import { allergenLine } from "@/data/site";
 import {
-  ConfirmPending,
-  Eyebrow,
+  PriceDash,
+  PricesNotice,
   Section,
-  TerrazzoDivider,
+  SectionLabel,
   TravelBadge,
   VegMark,
 } from "@/components/dolce";
@@ -31,6 +31,11 @@ export const Route = createFileRoute("/menu/")({
   }),
   component: MenuPage,
 });
+
+const filterClass = (on: boolean) =>
+  `label border-b px-1 pb-2 pt-1 transition-colors ${
+    on ? "border-pistachio-600 text-pistachio-600" : "border-rule text-stone hover:text-ink"
+  }`;
 
 function MenuPage() {
   const [q, setQ] = useState("");
@@ -59,46 +64,41 @@ function MenuPage() {
 
   return (
     <>
-      <Section>
-        <Eyebrow>The menu</Eyebrow>
-        <h1 className="mt-2 text-[38px] sm:text-[52px]">
+      <Section scale={0.7}>
+        <SectionLabel>The menu</SectionLabel>
+        <h1 className="display mt-8 max-w-[18ch]">
           {totalItems} dishes. {menu.length} sections. All vegetarian.
         </h1>
-        <p className="measure mt-3">
-          Search it, filter it, or link straight to a section. Prices are being confirmed with the
-          kitchen — we would rather show nothing than a number we invented.
-        </p>
 
-        <div className="mt-6 flex flex-wrap items-center gap-3 rounded-[4px] border border-rule bg-limewash-2 p-4">
-          <label className="w-full">
-            <span className="eyebrow text-stone">Search dishes</span>
-            <div className="mt-1 flex items-center gap-2">
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="risotto, paneer, cold brew…"
-                className="h-[52px] w-full rounded-[4px] border border-rule bg-limewash px-4 text-[17px]"
-              />
-              {q ? (
-                <button type="button" aria-label="Clear search" onClick={() => setQ("")} className="btn-secondary px-4">
-                  ✕
-                </button>
-              ) : null}
-            </div>
-          </label>
+        <div className="mt-[var(--space-block)] grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <label className="block">
+              <span className="label text-stone">Search dishes</span>
+              <div className="mt-2 flex items-baseline gap-4">
+                <input
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="risotto, paneer, cold brew…"
+                  className="field-line text-[24px]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                />
+                {q ? (
+                  <button type="button" onClick={() => setQ("")} className="label shrink-0 text-stone">
+                    Clear
+                  </button>
+                ) : null}
+              </div>
+            </label>
+          </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-end gap-x-6 gap-y-4 lg:col-span-5">
             {(["all", "food", "desserts", "drinks"] as const).map((g) => (
               <button
                 key={g}
                 type="button"
                 onClick={() => setGroup(g)}
                 aria-pressed={group === g}
-                className={`rounded-[4px] border px-3 py-2 text-[15px] ${
-                  group === g
-                    ? "border-pistachio-600 bg-pistachio-100 text-pistachio-800"
-                    : "border-rule bg-limewash text-ink"
-                }`}
+                className={filterClass(group === g)}
               >
                 {g === "all" ? "Everything" : groupLabels[g]}
               </button>
@@ -107,107 +107,115 @@ function MenuPage() {
               type="button"
               onClick={() => setSignatureOnly((v) => !v)}
               aria-pressed={signatureOnly}
-              className={`rounded-[4px] border px-3 py-2 text-[15px] ${
-                signatureOnly ? "border-amarena bg-caramel-100" : "border-rule bg-limewash"
-              }`}
+              className={filterClass(signatureOnly)}
             >
-              Signature dishes
+              ∗ Signature
             </button>
             <button
               type="button"
               onClick={() => setTableOnly((v) => !v)}
               aria-pressed={tableOnly}
-              className={`rounded-[4px] border px-3 py-2 text-[15px] ${
-                tableOnly ? "border-pistachio-600 bg-pistachio-100" : "border-rule bg-limewash"
-              }`}
+              className={filterClass(tableOnly)}
             >
               Best at the table
             </button>
           </div>
         </div>
 
-        <p className="mt-4 text-[15px] text-stone">{allergenLine}</p>
+        <div className="mt-10 space-y-3">
+          <PricesNotice />
+          <p className="text-[16px] text-stone">{allergenLine}</p>
+        </div>
       </Section>
 
-      <TerrazzoDivider />
-
-      <Section>
+      <Section scale={0.7}>
         {results ? (
           <>
-            <h2 className="text-[24px]">
+            <SectionLabel>
               {results.length} {results.length === 1 ? "dish" : "dishes"} matching “{q}”
-            </h2>
-            <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+            </SectionLabel>
+            <div className="mt-8 border-b border-rule lg:columns-2 lg:gap-[calc(var(--gutter)*3)]">
               {results.map((i) => (
-                <li key={i.id} className="card-dolce p-4">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <VegMark size={14} />
-                    <p className="text-[17px] font-medium">{i.name}</p>
-                    {i.signature ? (
-                      <span className="font-mono text-[13px] text-amarena">Signature</span>
-                    ) : null}
+                <div
+                  key={i.id}
+                  className="index-row grid-cols-[1fr_auto] gap-6 break-inside-avoid"
+                >
+                  <div>
+                    <p className="text-[20px]" style={{ fontFamily: "var(--font-display)" }}>
+                      {i.signature ? <span className="text-amarena">∗ </span> : null}
+                      {i.name}
+                    </p>
+                    {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
+                    <p className="mt-1 flex flex-wrap items-baseline gap-4">
+                      <Link
+                        to="/menu/$section"
+                        params={{ section: i.sectionSlug }}
+                        className="label text-pistachio-600"
+                      >
+                        {i.section}
+                      </Link>
+                      <TravelBadge travels={i.travels} />
+                    </p>
                   </div>
-                  {i.desc ? <p className="mt-1 text-[16px]">{i.desc}</p> : null}
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <Link
-                      to="/menu/$section"
-                      params={{ section: i.sectionSlug }}
-                      className="text-[14px] text-pistachio-600 underline underline-offset-4"
-                    >
-                      {i.section}
-                    </Link>
-                    <TravelBadge travels={i.travels} />
-
-                  </div>
-                </li>
+                  <PriceDash />
+                </div>
               ))}
-            </ul>
+            </div>
             {results.length === 0 ? (
-              <p className="mt-4">
+              <p className="mt-8 text-[19px]">
                 Nothing matched. Try “paneer”, “risotto”, “upwas” or “cold brew”.
               </p>
             ) : null}
           </>
         ) : (
-          <div className="space-y-12">
+          <div className="space-y-[var(--space-section)]">
             {(["food", "desserts", "drinks"] as const)
               .filter((g) => sections.some((s) => s.group === g))
               .map((g) => (
                 <div key={g}>
-                  <h2 className="text-[30px]">{groupLabels[g]}</h2>
-                  <div className="mt-5 space-y-8">
+                  <SectionLabel>{groupLabels[g]}</SectionLabel>
+                  <div className="mt-[var(--space-block)] space-y-[var(--space-block)]">
                     {sections
                       .filter((s) => s.group === g)
                       .map((s) => (
                         <div key={s.slug} id={s.slug}>
-                          <div className="flex flex-wrap items-center gap-3 border-b border-rule pb-2">
-                            <VegMark size={16} />
-                            <h3 className="text-[24px]">
+                          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-b border-ink pb-3">
+                            <h2 className="text-h3">
                               <Link to="/menu/$section" params={{ section: s.slug }}>
                                 {s.name}
                               </Link>
-                            </h3>
-                            <span className="font-mono text-[14px] text-stone">{s.count}</span>
+                            </h2>
+                            <span className="num text-[15px] text-stone">{s.count}</span>
                             <TravelBadge travels={s.travels} />
+                            <VegMark size={13} className="ml-auto" />
                           </div>
-                          {s.note ? <p className="mt-2 text-[16px] text-stone">{s.note}</p> : null}
-                          <ul className="mt-3 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                          {s.note ? (
+                            <p className="measure mt-4 text-[17px] text-stone">{s.note}</p>
+                          ) : null}
+                          <div className="mt-4 border-b border-rule lg:columns-2 lg:gap-[calc(var(--gutter)*3)]">
                             {s.items
                               .filter((i) => !signatureOnly || i.signature)
                               .map((i) => (
-                                <li key={i.id} className="border-b border-rule/60 pb-3">
-                                  <div className="flex flex-wrap items-baseline gap-2">
-                                    <span className="text-[17px] font-medium">{i.name}</span>
-                                    {i.signature ? (
-                                      <span className="font-mono text-[13px] text-amarena">★</span>
+                                <div
+                                  key={i.id}
+                                  className="index-row grid-cols-[1fr_auto] gap-6 break-inside-avoid"
+                                >
+                                  <div>
+                                    <p
+                                      className="text-[20px]"
+                                      style={{ fontFamily: "var(--font-display)" }}
+                                    >
+                                      {i.signature ? <span className="text-amarena">∗ </span> : null}
+                                      {i.name}
+                                    </p>
+                                    {i.desc ? (
+                                      <p className="mt-1 text-[16px] text-stone">{i.desc}</p>
                                     ) : null}
                                   </div>
-                                  {i.desc ? (
-                                    <p className="mt-1 text-[16px] text-stone">{i.desc}</p>
-                                  ) : null}
-                                </li>
+                                  <PriceDash />
+                                </div>
                               ))}
-                          </ul>
+                          </div>
                         </div>
                       ))}
                   </div>

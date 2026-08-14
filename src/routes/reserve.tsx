@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { site } from "@/data/site";
-import { ConfirmPending, Eyebrow, Section, VegMark, houndstoothStyle } from "@/components/dolce";
+import { Eyebrow, Section, TimingsNotice, VegMark, houndstoothStyle } from "@/components/dolce";
 
 export const Route = createFileRoute("/reserve")({
   head: () => ({
@@ -78,9 +78,9 @@ function Reserve() {
           <a href={site.phoneHref} className="btn-primary mt-6">
             Call {site.phoneDisplay}
           </a>
-          <p className="mt-4">
-            <ConfirmPending label="Opening hours" />
-          </p>
+          <div className="mt-8">
+            <TimingsNotice />
+          </div>
           <div className="mt-6 flex items-center gap-2 rounded-[4px] border border-rule bg-limewash-2 px-3 py-2">
             <VegMark size={18} withWords />
           </div>

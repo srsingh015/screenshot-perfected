@@ -54,6 +54,9 @@ function SectionPage() {
       <h1 className="mt-3 text-[38px] sm:text-[52px]">{section.name}</h1>
       <p className="font-mono text-[15px] text-stone">{section.count} dishes · all vegetarian</p>
       {section.note ? <p className="measure mt-3 text-[17px]">{section.note}</p> : null}
+      <p className="mt-4 flex flex-wrap items-center gap-2 text-[16px] text-stone">
+        Prices and portions for this section are <ConfirmPending label="prices & portions" />
+      </p>
 
       <ul className="mt-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
         {section.items.map((i) => (
@@ -65,13 +68,10 @@ function SectionPage() {
               ) : null}
             </div>
             {i.desc ? <p className="mt-1 text-[16px] text-stone">{i.desc}</p> : null}
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <ConfirmPending label="price" />
-              <ConfirmPending label="portion" />
-            </div>
           </li>
         ))}
       </ul>
+
 
       <p className="mt-6 text-[15px] text-stone">{allergenLine}</p>
 
